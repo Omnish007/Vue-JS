@@ -3,14 +3,22 @@
     name:"App",
     data(){
       return{
-        name:"abc"
+        greet:"hello",
+        name:"abc",
+        age:30
       }
     }
   }
 </script>
 
+
+
 <template>
-  <h1>hello, {{name}}</h1>
+  <h1>{{greet}}, {{name}}</h1>
+  <div v-text="age"></div>
+
+  <!-- gives error -->
+  <!-- <div v-text="age">hello</div> -->
 </template>
 
 <style>
