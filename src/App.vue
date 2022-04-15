@@ -3,9 +3,31 @@ export default {
   name: "App",
   data() {
     return {
-      num: "27",
-      display: true,
-      showElement: true,
+      names: ["Lol", "Arr", "Foo"],
+      fullNames: [
+        { first: "Lol", last: "last lol" },
+        { first: "Arr", last: "last Arr" },
+        { first: "foo", last: "last foo" },
+      ],
+      actors: [
+        {
+          name: "lol",
+          movies: ["lol1", "lol2"],
+        },
+        {
+          name: "Arr",
+          movies: ["Arr1", "Arr2"],
+        },
+        {
+          name: "foo",
+          movies: ["foo1", "foo2"],
+        },
+      ],
+
+      myinfo: {
+        name: "Arr",
+        age: "Foo",
+      },
     };
   },
 };
@@ -14,32 +36,27 @@ export default {
 
 
 <template>
-  <!-- v-if  -->
-  <h1 v-if="num === 0">Number is 0</h1>
-  <h1 v-if="num === 5">Number is 5</h1>
+  <!-- iterate using array  -->
+  <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
   <hr />
 
-  <!-- v-else -->
-  <h1 v-if="num === 5">Number is 5</h1>
-  <h2 v-else>Number is not equal to 5</h2>
+  <!-- iterate using array of object  -->
+  <h2 v-for="(name, index) in fullNames" :key="index">
+    {{ index }} {{ name.first }} - {{ name.last }}
+  </h2>
   <hr />
 
-  <!-- v-else-if -->
-  <h1 v-if="num === 0">Number is 0</h1>
-  <h2 v-else-if="num < 0">Number is negative</h2>
-  <h2 v-else-if="num > 0">Number is positive</h2>
-  <h2 v-else>Not a number</h2>
+  <!-- iterate using array of array  -->
+  <div v-for="actor in actors" :key="actor.name">
+    <h2>{{ actor.name }}</h2>
+    <span v-for="movie in actor.movies" :key="movie">{{ movie }}</span>
+  </div>
+  <hr />
 
-  <!-- we can pass div also but div is rendered in dom template is not -->
-  <template v-if="display">
-    <h1>Vue</h1>
-    <h1>Js</h1>
-    <h1>Front-end</h1>
-  </template>
-
-  <!-- diffrence between v-if and v-show if it return false then v-if element is not present in dom but v-show element is present in dom with display none propertie -->
-  <!-- v-show -->
-  <h2 v-show="showElement">Using v-show</h2>
+  <!-- iterate using object  -->
+  <h2 v-for="(value, key, index) in myinfo" :key="index">
+    {{ value }} - {{ key }} - {{ index }}
+  </h2>
 </template>
 
 <style>
