@@ -21,13 +21,13 @@ export default {
 
 <template>
   <!-- it also allows camel case in styles like "font-size" and fontSize -->
-  <h1 v-bind:style="{ color: highlight, fontSize: '50px' }">Initial styles</h1>
+  <h1 :style="{ color: highlight, fontSize: '50px' }">Initial styles</h1>
 
   <!-- pass classes object -->
-  <h1 v-bind:style="headerStyles">Initial styles</h1>
+  <h1 :style="headerStyles">Initial styles</h1>
 
   <!-- pass classes array -->
-  <h1 v-bind:style="[headerStyles, bgStyle]">Initial styles</h1>
+  <h1 :style="[headerStyles, bgStyle]">Initial styles</h1>
 </template>
 
 <style>
