@@ -4,30 +4,6 @@ export default {
   data() {
     return {
       names: ["Lol", "Arr", "Foo"],
-      fullNames: [
-        { first: "Lol", last: "last lol" },
-        { first: "Arr", last: "last Arr" },
-        { first: "foo", last: "last foo" },
-      ],
-      actors: [
-        {
-          name: "lol",
-          movies: ["lol1", "lol2"],
-        },
-        {
-          name: "Arr",
-          movies: ["Arr1", "Arr2"],
-        },
-        {
-          name: "foo",
-          movies: ["foo1", "foo2"],
-        },
-      ],
-
-      myinfo: {
-        name: "Arr",
-        age: "Foo",
-      },
     };
   },
 };
@@ -36,27 +12,10 @@ export default {
 
 
 <template>
-  <!-- iterate using array  -->
-  <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
-  <hr />
-
-  <!-- iterate using array of object  -->
-  <h2 v-for="(name, index) in fullNames" :key="index">
-    {{ index }} {{ name.first }} - {{ name.last }}
-  </h2>
-  <hr />
-
-  <!-- iterate using array of array  -->
-  <div v-for="actor in actors" :key="actor.name">
-    <h2>{{ actor.name }}</h2>
-    <span v-for="movie in actor.movies" :key="movie">{{ movie }}</span>
-  </div>
-  <hr />
-
-  <!-- iterate using object  -->
-  <h2 v-for="(value, key, index) in myinfo" :key="index">
-    {{ value }} - {{ key }} - {{ index }}
-  </h2>
+  <!-- conditional list rendering  -->
+  <template v-for="name in names" :key="name">
+    <h1 v-if="name === 'Lol'">{{ name }}</h1>
+  </template>
 </template>
 
 <style>
@@ -69,3 +28,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+ 
