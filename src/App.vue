@@ -3,28 +3,33 @@ export default {
   name: "App",
   data() {
     return {
-      base: 5,
+      name: "Arr",
+      count: 0,
     };
   },
   methods: {
-    add(a, b, c) {
-      return a + b + c;
+    increment(num) {
+      this.count += num;
     },
-    // don't accept arrow function in methods
-    multiply(num) {
-      // access data value using this keyword
-      return num * this.base;
+    decrement(num) {
+      this.count -= num;
     },
   },
 };
 </script>
 
-
-
 <template>
-  <h1>{{ 2 + 7 + 1 + 17 }}</h1>
-  <h1>Add method {{ add(2, 7, 18) }}</h1>
-  <h1>Add method {{ multiply(9) }}</h1>
+  <h1>{{ name }}</h1>
+  <div>
+    <button v-on:click="name = 'Lol'">Change name</button>
+  </div>
+  <hr />
+
+  <div>
+    <h1>{{ count }}</h1>
+    <button v-on:click="increment(5)">Increment</button>
+    <button v-on:click="decrement(2)">Decrement</button>
+  </div>
 </template>
 
 <style>
