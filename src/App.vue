@@ -3,8 +3,18 @@ export default {
   name: "App",
   data() {
     return {
-      names: ["Lol", "Arr", "Foo"],
+      base: 5,
     };
+  },
+  methods: {
+    add(a, b, c) {
+      return a + b + c;
+    },
+    // don't accept arrow function in methods
+    multiply(num) {
+      // access data value using this keyword
+      return num * this.base;
+    },
   },
 };
 </script>
@@ -12,10 +22,9 @@ export default {
 
 
 <template>
-  <!-- conditional list rendering  -->
-  <template v-for="name in names" :key="name">
-    <h1 v-if="name === 'Lol'">{{ name }}</h1>
-  </template>
+  <h1>{{ 2 + 7 + 1 + 17 }}</h1>
+  <h1>Add method {{ add(2, 7, 18) }}</h1>
+  <h1>Add method {{ multiply(9) }}</h1>
 </template>
 
 <style>
