@@ -8,7 +8,12 @@ export default {
     };
   },
   methods: {
-    increment(num) {
+    changeName(event) {
+      this.name = "LoL";
+      console.log(event);
+    },
+    increment(num, event) {
+      console.log(event);
       this.count += num;
     },
     decrement(num) {
@@ -18,17 +23,21 @@ export default {
 };
 </script>
 
+
+
 <template>
+  <!-- we can replace v-on: to @ -->
+
   <h1>{{ name }}</h1>
   <div>
-    <button v-on:click="name = 'Lol'">Change name</button>
+    <button @click="changeName">Change name</button>
   </div>
   <hr />
 
   <div>
     <h1>{{ count }}</h1>
-    <button v-on:click="increment(5)">Increment</button>
-    <button v-on:click="decrement(2)">Decrement</button>
+    <button @click="increment(5, $event)">Increment</button>
+    <button @click="decrement(2)">Decrement</button>
   </div>
 </template>
 
