@@ -3,21 +3,43 @@ export default {
   name: "App",
   data() {
     return {
-      formValues: {
-        name: "",
-        profileSummary: "",
-        country: "",
-        jobLocation: [],
-        remoteWork: "no",
-        skillSet: [],
-        yearsOfExperience: "",
-        age: null,
-      },
+      firstname: "Lol",
+      lastname: "Arr",
+      items: [
+        {
+          id: 1,
+          title: "TV",
+          price: 100,
+        },
+        {
+          id: 2,
+          title: "Phone",
+          price: 200,
+        },
+        {
+          id: 3,
+          title: "Leptop",
+          price: 300,
+        },
+      ],
+      country: "",
     };
   },
   methods: {
-    submitForm() {
-      console.log("FormData", this.formValues);
+    getTotal() {
+      // call all time any  chages in ui
+      console.log("getTotal from method called");
+      return this.items.reduce((total, curr) => (total += curr.price), 0);
+    },
+  },
+  computed: {
+    fullname() {
+      return `${this.firstname} ${this.lastname}`;
+    },
+    total() {
+      // call only dependency is change
+      console.log("total from computed called");
+      return this.items.reduce((total, curr) => (total += curr.price), 0);
     },
   },
 };
@@ -26,163 +48,32 @@ export default {
 
 
 <template>
-  <div>
-    <pre>
-      {{ JSON.stringify(formValues, null, 2) }}
-    </pre>
-  </div>
+  <h1>Fullname - {{ firstname }} {{ lastname }}</h1>
+  <h1>computed Fullname - {{ fullname }}</h1>
 
-  <!-- prevent modifier is use to prevent default behaviour -->
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="name">Name</label>
-      <!-- trim and lazy modofier -->
-      <input type="text" id="name" v-model.trim.lazy="formValues.name" />
-    </div>
+  <!-- advanrtages of computed properties -->
+  <!-- if we need to use total many time then we need to write this logic many time -->
+  <h2>Total - {{ items.reduce((total, curr) => (total += curr.price), 0) }}</h2>
 
-    <div>
-      <label for="profile">Profile Summary</label>
-      <textarea type="text" id="profile" v-model="formValues.profileSummary" />
-    </div>
+  <button @click="items.push({ id: 4, title: 'keyboard', price: 50 })">
+    Add Item
+  </button>
+  <!-- computed method both can be use in this case but computed have advantages of cache memory  -->
+  <h2>Computed Total - {{ total }}</h2>
+  <h2>Method Total - {{ getTotal() }}</h2>
 
-    <div>
-      <label for="country">Country</label>
-      <select id="country" v-model="formValues.country">
-        <option value="">Select a country</option>
-        <option value="india">India</option>
-        <option value="vietnam">Vietnam</option>
-        <option value="singapore">Singapore</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="job-location">Job Location</label>
-      <select id="job-location" multiple v-model="formValues.jobLocation">
-        <option value="india">India</option>
-        <option value="vietnam">Vietnam</option>
-        <option value="singapore">Singapore</option>
-      </select>
-    </div>
-
-    <div>
-      <input
-        type="checkbox"
-        id="remoteWork"
-        v-model="formValues.remoteWork"
-        true-value="yes"
-        false-value="no"
-      />
-      <label for="remoteWork">Open to remote work?</label>
-    </div>
-
-    <div>
-      <label>Skill set</label>
-      <input
-        type="checkbox"
-        id="html"
-        value="html"
-        v-model="formValues.skillSet"
-      />
-      <label for="html">Html</label>
-      <input
-        type="checkbox"
-        id="css"
-        value="css"
-        v-model="formValues.skillSet"
-      />
-      <label for="css">Css</label>
-      <input
-        type="checkbox"
-        id="javaScript"
-        value="javaScript"
-        v-model="formValues.skillSet"
-      />
-      <label for="javaScript">JavaScript</label>
-    </div>
-
-    <div>
-      <label>Years of experience</label>
-      <input
-        type="radio"
-        id="0-2"
-        value="0-2"
-        v-model="formValues.yearsOfExperience"
-      />
-      <label for="0-2">0-2</label>
-      <input
-        type="radio"
-        id="3-5"
-        value="3-5"
-        v-model="formValues.yearsOfExperience"
-      />
-      <label for="3-5">3-5</label>
-      <input
-        type="radio"
-        id="6-10"
-        value="6-10"
-        v-model="formValues.yearsOfExperience"
-      />
-      <label for="6-10">6-10</label>
-      <input
-        type="radio"
-        id="10+"
-        value="10+"
-        v-model="formValues.yearsOfExperience"
-      />
-      <label for="10+">10+</label>
-    </div>
-
-    <div>
-      <label for="age">Age</label>
-      <!-- number and key modifier  -->
-
-      <input
-        @keyup.enter="submitForm"
-        type="number"
-        id="age"
-        v-model.number="formValues.age"
-      />
-    </div>
-
-    <!-- <div>
-      <button>Submit</button>
-    </div> -->
-  </form>
+  <input type="text" v-model="country" />
 </template>
+
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
+  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-label {
-  font-weight: bold;
-  display: flex;
-  margin-bottom: 5px;
-}
-input + label {
-  font-weight: bold;
-  display: inline-flex;
-  margin-right: 20px;
-}
-input[type="text"],
-textarea,
-select {
-  display: block;
-  width: 400px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 </style>
  
