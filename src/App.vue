@@ -1,91 +1,54 @@
 <script >
 export default {
-  name: "App",
-  data() {
-    return {
-      firstname: "Lol",
-      lastname: "Arr",
-      items: [
-        {
-          id: 1,
-          title: "TV",
-          price: 100,
+    name: "App",
+    data() {
+        return {
+            firstname: "Lol",
+            lastname: "Arr",
+        };
+    },
+    methods: {
+        getTotal() {
+            // call all time any  chages in ui
+            console.log("getTotal from method called");
+            return this.items.reduce((total, curr) => (total += curr.price), 0);
         },
-        {
-          id: 2,
-          title: "Phone",
-          price: 200,
+
+        changeFullName() {
+            this.fullname = "Clark Kent";
         },
-        {
-          id: 3,
-          title: "Leptop",
-          price: 300,
+    },
+    computed: {
+        fullname: {
+            get() {
+                return `${this.firstname} ${this.lastname}`;
+            },
+            set(value) {
+                const names = value.split(" ");
+                this.firstname = names[0];
+                this.lastname = names[1];
+            },
         },
-      ],
-      country: "",
-    };
-  },
-  methods: {
-    getTotal() {
-      // call all time any  chages in ui
-      console.log("getTotal from method called");
-      return this.items.reduce((total, curr) => (total += curr.price), 0);
     },
-  },
-  computed: {
-    fullname() {
-      return `${this.firstname} ${this.lastname}`;
-    },
-    total() {
-      // call only dependency is change
-      console.log("total from computed called");
-      return this.items.reduce((total, curr) => (total += curr.price), 0);
-    },
-    expoensiveitems() {
-      return this.items.filter((item) => item.price > 100);
-    },
-  },
 };
 </script>
 
 
 <template>
-  <h1>Fullname - {{ firstname }} {{ lastname }}</h1>
-  <h1>computed Fullname - {{ fullname }}</h1>
+    <h1>Fullname - {{ firstname }} {{ lastname }}</h1>
+    <h1>computed Fullname - {{ fullname }}</h1>
 
-  <!-- advanrtages of computed properties -->
-  <!-- if we need to use total many time then we need to write this logic many time -->
-  <h2>Total - {{ items.reduce((total, curr) => (total += curr.price), 0) }}</h2>
-
-  <button @click="items.push({ id: 4, title: 'keyboard', price: 50 })">
-    Add Item
-  </button>
-  <!-- computed method both can be use in this case but computed have advantages of cache memory  -->
-  <h2>Computed Total - {{ total }}</h2>
-  <h2>Method Total - {{ getTotal() }}</h2>
-
-  <input type="text" v-model="country" />
-  <hr />
-
-  <!-- instad of v-for and v-if we shoud use computed properties to avoid unneccessary renders -->
-  <template v-for="item in items" :key="item.id">
-    <h2 v-if="item.price > 100">{{ item.title }} - {{ item.price }}</h2>
-  </template>
-
-  <h1 v-for="item in expoensiveitems" :key="item.id">
-    {{ item.title }}-{{ item.price }}
-  </h1>
+    <button @click="changeFullName">Changr fullname</button>
 </template>
 
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 </style>
- 
