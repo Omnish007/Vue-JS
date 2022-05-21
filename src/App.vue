@@ -2,7 +2,11 @@
 import Greet from "./components/Greet.vue";
 export default {
     name: "App",
-    data() {},
+    data() {
+        return {
+            name: "lol",
+        };
+    },
     components: {
         Greet,
     },
@@ -10,7 +14,12 @@ export default {
 </script>
 
 
-<template><Greet /></template>
+<template>
+    <Greet name="John" />
+    <Greet name="Clerk" />
+    <Greet name="Cena" />
+    <Greet :name="name" />
+</template>
 
 
 <style>
