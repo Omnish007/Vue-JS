@@ -49,7 +49,6 @@ export default {
 </script>
 
 
-
 <template>
   <h1>Fullname - {{ firstname }} {{ lastname }}</h1>
   <h1>computed Fullname - {{ fullname }}</h1>
