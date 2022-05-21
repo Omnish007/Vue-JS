@@ -3,31 +3,55 @@ export default {
     name: "App",
     data() {
         return {
-            firstname: "Lol",
-            lastname: "Arr",
+            volume: 0,
+            movie: "Batman",
+            movieInfo: {
+                title: "",
+                actor: "",
+            },
+            movieList: ["Batman", "superman"],
         };
     },
-    methods: {
-        getTotal() {
-            // call all time any  chages in ui
-            console.log("getTotal from method called");
-            return this.items.reduce((total, curr) => (total += curr.price), 0);
+    methods: {},
+    computed: {},
+    watch: {
+        volume(newValue, oldValue) {
+            if (newValue > oldValue && newValue === 16) {
+                alert(
+                    "Listening to a high volume for a long time may damage your hearing"
+                );
+            }
         },
 
-        changeFullName() {
-            this.fullname = "Clark Kent";
+        // if we provide default value to movie property on page load api is not calling in console message
+        // movie(newValue) {
+        //     console.log(`calling api with movie name = ${newValue}`);
+        // },
+
+        // if we want to solve above problem then use below code
+        movie: {
+            handler(newValue) {
+                console.log(`calling api with movie name = ${newValue}`);
+            },
+            // invoke function on page load
+            immediate: true,
         },
-    },
-    computed: {
-        fullname: {
-            get() {
-                return `${this.firstname} ${this.lastname}`;
+
+        movieInfo: {
+            handler(newValue) {
+                console.log(
+                    `calling api with movie title = ${newValue.title} and actor = ${newValue.actor}`
+                );
             },
-            set(value) {
-                const names = value.split(" ");
-                this.firstname = names[0];
-                this.lastname = names[1];
+            // without deep : true watcher not track changes in object or array
+            deep: true,
+        },
+
+        movieList: {
+            handler(newValue) {
+                console.log(`Update list ${newValue}`);
             },
+            // deep: true,
         },
     },
 };
@@ -35,10 +59,23 @@ export default {
 
 
 <template>
-    <h1>Fullname - {{ firstname }} {{ lastname }}</h1>
-    <h1>computed Fullname - {{ fullname }}</h1>
+    <h2>Volume Tracker (0-20)</h2>
+    <h2>Current Volume {{ volume }}</h2>
+    <div>
+        <button @click="volume -= 2">-</button>
+        <button @click="volume += 2">+</button>
+    </div>
+    <input type="text" v-model="movie" />
 
-    <button @click="changeFullName">Changr fullname</button>
+    <input type="text" v-model="movieInfo.title" />
+    <input type="text" v-model="movieInfo.actor" />
+    <!-- deep true is required since we mutet arr or obj  -->
+    <!-- <button @click="movieList.push(['wonder women'])">Add movie - mutet</button> -->
+
+    <!-- deep true is not required since we change refrence ofarr or obj  -->
+    <button @click="movieList = movieList.concat(['wonder women'])">
+        Add movie - new refrence
+    </button>
 </template>
 
 
