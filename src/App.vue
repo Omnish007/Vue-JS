@@ -1,26 +1,31 @@
 <script >
-import Article from "./components/Article.vue";
+import ComponentC from "./components/ComponentC.vue";
+
 export default {
     name: "App",
     data() {
         return {
-            name: "lol",
+            name: "Omnish",
+        };
+    },
+    provide() {
+        return {
+            username: this.name,
         };
     },
     components: {
-        Article,
+        ComponentC,
     },
 };
 </script>
 
 
 <template>
-    <Article
-        id="my-article"
-        title="Article title"
-        :likes="10"
-        :isPublished="true"
-    />
+    <!-- we cannot use username in component from we provide the value  -->
+    <!-- for Ex. we provide user-name from App compo so we can not directly use in
+    app we need to add in data propertie -->
+    <h2>App component - Username:{{ name }}</h2>
+    <ComponentC />
 </template>
 
 
