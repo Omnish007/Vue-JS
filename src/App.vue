@@ -1,6 +1,4 @@
-// 30 end
 <script >
-import Greet from "./components/Greet.vue";
 import Article from "./components/Article.vue";
 export default {
     name: "App",
@@ -10,7 +8,6 @@ export default {
         };
     },
     components: {
-        Greet,
         Article,
     },
 };
@@ -18,11 +15,12 @@ export default {
 
 
 <template>
-    <Greet name="John" />
-    <Greet name="Clerk" />
-    <Greet name="Cena" />
-    <Greet :name="name" />
-    <Article title="Article title" :likes="10" :isPublished="true" />
+    <Article
+        id="my-article"
+        title="Article title"
+        :likes="10"
+        :isPublished="true"
+    />
 </template>
 
 
