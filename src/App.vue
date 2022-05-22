@@ -1,31 +1,29 @@
 <script >
-import ComponentC from "./components/ComponentC.vue";
+import Popup from "./components/Popup.vue";
 
 export default {
     name: "App",
     data() {
         return {
-            name: "Omnish",
-        };
-    },
-    provide() {
-        return {
-            username: this.name,
+            showPopup: false,
         };
     },
     components: {
-        ComponentC,
+        Popup,
+    },
+    methods: {
+        closePopup(name) {
+            this.showPopup = false;
+            console.log("name", name);
+        },
     },
 };
 </script>
 
 
 <template>
-    <!-- we cannot use username in component from we provide the value  -->
-    <!-- for Ex. we provide user-name from App compo so we can not directly use in
-    app we need to add in data propertie -->
-    <h2>App component - Username:{{ name }}</h2>
-    <ComponentC />
+    <button @click="showPopup = true">Show Popup</button>
+    <Popup v-show="showPopup" @close="closePopup" />
 </template>
 
 
