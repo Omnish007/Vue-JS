@@ -1,5 +1,5 @@
 <script >
-import Card from "./components/Card.vue";
+import NameList from "./components/NameList.vue";
 
 export default {
     name: "App",
@@ -7,7 +7,7 @@ export default {
         return {};
     },
     components: {
-        Card,
+        NameList,
     },
     methods: {},
 };
@@ -15,19 +15,21 @@ export default {
 
 
 <template>
-    <!-- pass any content and in child component slot tag is replace by the content 
-    between custom component tag -->
-    <Card>
-        <template v-slot:header>
-            <h3>Header</h3>
+    <NameList>
+        <template v-slot:default="slotProps">
+            {{ slotProps.firstName }} {{ slotProps.lastName }}
         </template>
-        <template v-slot:default>
-            <img src="https://picsum.photos/200" alt="" />
+    </NameList>
+    <NameList>
+        <template v-slot:default="slotProps">
+            {{ slotProps.lastName }} {{ slotProps.firstName }}
         </template>
-        <template v-slot:footer>
-            <button>vie details</button>
+    </NameList>
+    <NameList>
+        <template v-slot:default="slotProps">
+            {{ slotProps.firstName }}
         </template>
-    </Card>
+    </NameList>
 </template>
 
 
