@@ -1,14 +1,13 @@
 <script >
-import Input from "./components/Input.vue";
+import Card from "./components/Card.vue";
+
 export default {
     name: "App",
     data() {
-        return {
-            name: "",
-        };
+        return {};
     },
     components: {
-        Input,
+        Card,
     },
     methods: {},
 };
@@ -16,7 +15,12 @@ export default {
 
 
 <template>
-    <Input v-model="name" />
+    <!-- pass any content and in child component slot tag is replace by the content 
+    between custom component tag -->
+    <Card></Card>
+    <Card>Card Content</Card>
+    <Card><h2>Card Content</h2></Card>
+    <Card><img src="https://picsum.photos/200" /> </Card>
 </template>
 
 
