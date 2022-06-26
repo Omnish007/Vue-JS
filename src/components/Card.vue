@@ -1,5 +1,18 @@
 <template>
-    <div class="card"><slot>Default Content</slot></div>
+    <!-- if we have multiple slots we need to specify slots name -->
+    <div class="card">
+        <div id="card-header">
+            <slot name="header"></slot>
+        </div>
+
+        <div id="card-content">
+            <slot></slot>
+        </div>
+
+        <div id="card-footer">
+            <slot name="footer"></slot>
+        </div>
+    </div>
 </template>
 
 <script>
