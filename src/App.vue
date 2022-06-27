@@ -1,21 +1,11 @@
-<script >
+<script setup>
+import { ref } from "vue";
 import Input from "./components/Input.vue";
-export default {
-    name: "App",
-    data() {
-        return {
-            name: "",
-        };
-    },
-    components: {
-        Input,
-    },
-    methods: {},
-};
+const name = ref("");
 </script>
 
-
 <template>
+    {{ name }}
     <Input v-model="name" />
 </template>
 

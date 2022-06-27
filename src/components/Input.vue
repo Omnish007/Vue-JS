@@ -6,13 +6,10 @@
     />
 </template>
 
-<script>
-export default {
-    name: "Input",
-    props: {
-        modelValue: String,
-    },
-};
+<script setup>
+defineProps({
+    modelValue: String,
+});
 </script>
 
 <style scoped>
